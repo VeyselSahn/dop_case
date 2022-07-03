@@ -30,16 +30,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-
   #Network
   dio: ^4.0.6
   #State Management
   provider: ^6.0.3
   #Performance
   get_it: ^7.2.0
-  #Model
-  json_serializable: ^6.2.0
-  json_annotation: ^4.5.0
   #Time Parsing
   intl: ^0.17.0
   #Splash
