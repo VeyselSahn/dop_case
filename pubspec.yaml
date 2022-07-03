@@ -40,6 +40,8 @@ dependencies:
   intl: ^0.17.0
   #Splash
   flutter_native_splash: ^2.1.6
+  #Localization
+  translator: ^0.1.7
 
 dev_dependencies:
   flutter_lints: ^2.0.1
