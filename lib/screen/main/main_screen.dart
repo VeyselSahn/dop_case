@@ -14,11 +14,7 @@ class MainScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Expanded(
-              child: ListView.builder(
-            itemCount: 17,
-            itemBuilder: (context, index) => const CityTileWidget(),
-          )),
+          TileListViewWidget(),
           const SizedBox(
             height: 30,
           )

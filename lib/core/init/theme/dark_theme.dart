@@ -16,8 +16,12 @@ var _darkTheme = ThemeData(
           TextStyle(fontSize: 32, fontWeight: FontWeight.w600, fontFamily: 'Montserrat', color: Colors.white),
       headlineMedium:
           TextStyle(fontSize: 15, fontWeight: FontWeight.w600, fontFamily: 'Montserrat', color: Colors.white),
-      headlineSmall:
-          TextStyle(fontSize: 15, fontWeight: FontWeight.w400, fontFamily: 'Montserrat', color: Colors.white),
+      headlineSmall: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          fontFamily: 'Montserrat',
+          color: Colors.white,
+          overflow: TextOverflow.ellipsis),
       //secondary screen
       displayLarge: TextStyle(
         fontSize: 79,

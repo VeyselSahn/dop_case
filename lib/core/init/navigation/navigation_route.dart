@@ -10,7 +10,9 @@ class NavigationRoute {
       case NavigationConstants.main:
         return normalNavigate(const MainScreen());
       case NavigationConstants.secondary:
-        return normalNavigate(const SecondaryScreen());
+        return normalNavigate(SecondaryScreen(
+          locationPath: args.arguments as String,
+        ));
       default:
         return normalNavigate(const MainScreen());
     }

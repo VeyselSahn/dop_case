@@ -7,6 +7,7 @@ class MainBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mainProvider = context.watch<MainProvider>();
     return SizedBox(
       height: context.deviceHeight * .3 + 25,
       child: Stack(
@@ -29,6 +30,8 @@ class MainBarWidget extends StatelessWidget {
               height: 50,
               left: 30,
               child: TextFormField(
+                controller: mainProvider.controller,
+                onChanged: (val) => mainProvider.search(),
                 decoration: const InputDecoration(hintText: 'Arama', prefixIcon: Icon(Icons.search)),
               ))
         ],

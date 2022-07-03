@@ -3,7 +3,8 @@ import 'package:dop_case/screen/secondary/components/sec_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class SecondaryScreen extends StatelessWidget {
-  const SecondaryScreen({Key? key}) : super(key: key);
+  final String locationPath;
+  const SecondaryScreen({Key? key, required this.locationPath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class SecondaryScreen extends StatelessWidget {
             ),
           ),
           Text(
-            'Istanbul',
+            locationPath,
             style: Theme.of(context).textTheme.displayMedium,
           ),
           const SizedBox(height: 5),

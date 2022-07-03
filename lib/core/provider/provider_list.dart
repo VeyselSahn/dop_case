@@ -1,3 +1,4 @@
+import 'package:dop_case/core/provider/main_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'theme_provider.dart';
@@ -15,5 +16,8 @@ class ApplicationProvider {
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
     ),
+    ChangeNotifierProvider(
+      create: (context) => MainProvider(),
+    )
   ];
 }
