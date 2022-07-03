@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
         onTap: () => Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => MainScreen(),
+              builder: (context) => const MainScreen(),
             ),
             (route) => false),
         child: Center(

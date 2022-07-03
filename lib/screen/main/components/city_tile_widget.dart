@@ -1,6 +1,6 @@
+import 'package:dop_case/component/component_shelf.dart';
 import 'package:dop_case/core/core_shelf.dart';
 import 'package:flutter/material.dart';
-import '../../secondary/secondary_screen.dart';
 
 class CityTileWidget extends StatelessWidget {
   const CityTileWidget({Key? key}) : super(key: key);
@@ -37,12 +37,8 @@ class CityTileWidget extends StatelessWidget {
             Positioned(
               right: 10,
               child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SecondaryScreen(),
-                      ));
+                onTap: () async {
+                  await GlobalVars.navigatorService.navigateToPage(path: NavigationConstants.secondary);
                 },
                 child: CircleAvatar(
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,

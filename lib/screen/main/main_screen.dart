@@ -1,7 +1,5 @@
-import 'package:dop_case/core/core_shelf.dart';
 import 'package:dop_case/screen/main/components/city_tile_widget.dart';
 import 'package:dop_case/screen/main/components/main_bar_widget.dart';
-import 'package:dop_case/screen/secondary/secondary_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatelessWidget {

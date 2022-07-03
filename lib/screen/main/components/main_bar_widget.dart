@@ -1,5 +1,6 @@
 import 'package:dop_case/core/core_shelf.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainBarWidget extends StatelessWidget {
   const MainBarWidget({Key? key}) : super(key: key);
@@ -48,12 +49,15 @@ class MainBarWidget extends StatelessWidget {
               'Hoşgeldin Özgür',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            CircleAvatar(
-              radius: 17,
-              backgroundColor: Colors.white,
-              child: Image.asset(
-                'sun'.imgPngPath,
-                height: 25,
+            InkWell(
+              onTap: () => context.read<ThemeProvider>().changeTheme(),
+              child: CircleAvatar(
+                radius: 17,
+                backgroundColor: Colors.white,
+                child: Image.asset(
+                  'sun'.imgPngPath,
+                  height: 25,
+                ),
               ),
             )
           ],

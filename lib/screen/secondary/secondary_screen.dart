@@ -1,4 +1,3 @@
-import 'package:dop_case/core/core_shelf.dart';
 import 'package:dop_case/screen/secondary/components/clock_box_widget.dart';
 import 'package:dop_case/screen/secondary/components/sec_bar_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +15,13 @@ class SecondaryScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                ClockBoxWidget(text: '14'),
+              children: [
+                const ClockBoxWidget(text: '14'),
                 Text(
                   ':',
-                  style: TextStyle(color: Colors.white, fontSize: 60),
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
-                ClockBoxWidget(text: '43')
+                const ClockBoxWidget(text: '43')
               ],
             ),
           ),
