@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:dop_case/component/component_shelf.dart';
 import 'package:dop_case/core/core_shelf.dart';
 
 class ApiService {

@@ -7,7 +7,7 @@ class MainBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mainProvider = context.watch<MainProvider>();
+    var mainProvider = context.read<MainProvider>();
     return SizedBox(
       height: context.deviceHeight * .3 + 25,
       child: Stack(
@@ -21,7 +21,7 @@ class MainBarWidget extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: _buildTodayWidget(context),
+              child: _buildTodayWidget(context, mainProvider),
             ),
           ),
           Positioned(
@@ -39,41 +39,50 @@ class MainBarWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildTodayWidget(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Hoşgeldin Özgür',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            InkWell(
-              onTap: () => context.read<ThemeProvider>().changeTheme(),
-              child: CircleAvatar(
-                radius: 17,
-                backgroundColor: Colors.white,
-                child: Image.asset(
-                  'sun'.imgPngPath,
-                  height: 25,
-                ),
+  Widget _buildTodayWidget(BuildContext context, MainProvider mainProvider) {
+    return FutureBuilder(
+        future: mainProvider.fetchMyTime(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const SizedBox(
+              height: 0,
+            );
+          }
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${mainProvider.myTime.barStatusText!} Özgür',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  InkWell(
+                    onTap: () => context.read<ThemeProvider>().changeTheme(),
+                    child: CircleAvatar(
+                      radius: 17,
+                      backgroundColor: Colors.white,
+                      child: Image.asset(
+                        'sun'.imgPngPath,
+                        height: 25,
+                      ),
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
-        Text(
-          '09 : 54',
-          style: Theme.of(context).textTheme.headlineLarge,
-        ),
-        Text(
-          '8 Haziran , Çarşamba',
-          style: Theme.of(context).textTheme.headlineMedium,
-        )
-      ],
-    );
+              Text(
+                '${mainProvider.myTime.hour!} : ${mainProvider.myTime.minute!}',
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              Text(
+                '${mainProvider.myTime.dayNumber!} ${mainProvider.myTime.monthText!} , ${mainProvider.myTime.dayText!}',
+                style: Theme.of(context).textTheme.headlineMedium,
+              )
+            ],
+          );
+        });
   }
 }

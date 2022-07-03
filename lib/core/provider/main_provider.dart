@@ -2,12 +2,27 @@
 
 import 'dart:developer';
 
-import 'package:dop_case/core/init/singleton/global_vars.dart';
-import 'package:dop_case/core/model/timezone_tile_model.dart';
+import 'package:dop_case/core/core_shelf.dart';
+
 import 'package:flutter/cupertino.dart';
 
 class MainProvider extends ChangeNotifier {
   //for bar side
+  late TimeModel myTime;
+
+  void fillMyTime(TimeModel model) {
+    myTime = model;
+    notifyListeners();
+  }
+
+  Future<bool> fetchMyTime() async {
+    var _res = await GlobalVars.apiService.fetchData(GlobalVars.apiConstants.ip);
+    if (_res.data != null) {
+      var _model = await TimeModel().fromJson(_res.data);
+      fillMyTime(_model);
+    }
+    return true;
+  }
 
   //for list side
   List<TimeZoneTileModel> tileList = [];
@@ -29,7 +44,7 @@ class MainProvider extends ChangeNotifier {
 
   //which list will use
   // this will easier and cleaner than writing directly in widget
-  List<TimeZoneTileModel> get getList => searchList.isEmpty ? tileList : searchList;
+  List<TimeZoneTileModel> get getList => searchList.isEmpty && controller.text.isEmpty ? tileList : searchList;
 
   // search form
   final TextEditingController controller = TextEditingController();
