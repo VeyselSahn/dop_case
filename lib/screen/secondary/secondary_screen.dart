@@ -16,8 +16,9 @@ class SecondaryScreen extends StatelessWidget {
           future: secProvider.fetchLocationTime(locationPath),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return Center(
+                child: CircularProgressIndicator(
+                    strokeWidth: 5, color: Theme.of(context).extension<CustomColors>()!.iconColor),
               );
             }
             return Column(

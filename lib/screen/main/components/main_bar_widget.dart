@@ -64,9 +64,9 @@ class MainBarWidget extends StatelessWidget {
                     onTap: () => context.read<ThemeProvider>().changeTheme(),
                     child: CircleAvatar(
                       radius: 17,
-                      backgroundColor: Colors.white,
+                      backgroundColor: Theme.of(context).extension<CustomColors>()!.iconColor,
                       child: Image.asset(
-                        'sun'.imgPngPath,
+                        context.read<ThemeProvider>().isDark() ? 'sun'.imgPngPath : 'moon'.imgPngPath,
                         height: 25,
                       ),
                     ),

@@ -10,7 +10,8 @@ class ClockBoxWidget extends StatelessWidget {
     return Container(
       height: context.deviceWidth * .4,
       width: context.deviceWidth * .4,
-      decoration: BoxDecoration(color: Theme.of(context).backgroundColor, borderRadius: BorderRadius.circular(14)),
+      decoration: BoxDecoration(
+          color: Theme.of(context).extension<CustomColors>()!.boxColor, borderRadius: BorderRadius.circular(14)),
       child: Center(
         child: Text(
           text,

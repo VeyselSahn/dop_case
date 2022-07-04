@@ -8,6 +8,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).extension<CustomColors>()!.ussualcolor,
       body: InkWell(
         onTap: () => Navigator.pushAndRemoveUntil(
             context,

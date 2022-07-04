@@ -33,7 +33,8 @@ class TimeModel {
     // thats for spliting are because we will use different text , like 'Wednesday , 22' or '22 , Wednesday' spliting make easier
     var locations = (json?['timezone'] as String).split(r'/');
     // parsing time
-    var time = DateTime.fromMillisecondsSinceEpoch((json?['unixtime'] ?? '') * 1000, isUtc: false);
+    var offset = json?['utc_offset'] ?? '';
+    var time = convertDateTime(json?['utc_datetime'] ?? '', offset);
 
     //convert to text and translate
     var _day = await _translator.translate(DateFormat('EEEE').format(time), from: 'en', to: 'tr');
@@ -48,8 +49,8 @@ class TimeModel {
         year: time.year.toString(),
         dayText: _day.text,
         monthText: _month.text,
-        offset: json?['utc_offset'] ?? '',
-        region: locations.length == 3 ? locations.elementAt(0) + locations.elementAt(1) : locations.elementAt(0),
+        offset: 'GMT $offset',
+        region: locations.length == 3 ? locations.elementAt(1) : locations.elementAt(0),
         location: locations.length == 3 ? locations.elementAt(2) : locations.elementAt(1),
         hour: time.hour.toString().padLeft(2, '0'),
         minute: time.minute.toString().padLeft(2, '0'));
@@ -66,6 +67,15 @@ class TimeModel {
     } else {
       return 'Good Night';
     }
+  }
+
+  DateTime convertDateTime(String utctime, String offset) {
+    var cleaned = utctime.split(r'+');
+    var offsetList = offset.split(r':');
+    var parsed = DateTime.parse(cleaned.elementAt(0));
+    var time =
+        (parsed.add(Duration(hours: int.parse(offsetList.elementAt(0)), minutes: int.parse(offsetList.elementAt(1)))));
+    return time;
   }
 }
 
