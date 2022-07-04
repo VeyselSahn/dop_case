@@ -1,5 +1,6 @@
 import 'package:dop_case/core/core_shelf.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SecBarWidget extends StatelessWidget {
   const SecBarWidget({Key? key}) : super(key: key);
@@ -21,12 +22,13 @@ class SecBarWidget extends StatelessWidget {
           children: [
             InkWell(
               onTap: () => Navigator.pop(context),
-              child: const Icon(
+              child: Icon(
                 Icons.arrow_back,
-                color: Colors.white,
+                color: Theme.of(context).extension<CustomColors>()!.iconColor,
               ),
             ),
-            Image.asset('worldtime_title'.imgPngPath),
+            Image.asset(
+                context.read<ThemeProvider>().isDark() ? 'worldtime_dark'.imgPngPath : 'worldtime_light'.imgPngPath),
             const SizedBox()
           ],
         ),
