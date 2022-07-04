@@ -5,6 +5,8 @@ import 'package:dop_case/core/core_shelf.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'list_loading_widget.dart';
+
 Widget TileListViewWidget() {
   //thats for future builder function
   var mainProvider = GlobalVars.context.read<MainProvider>();
@@ -12,9 +14,7 @@ Widget TileListViewWidget() {
       future: mainProvider.fetchTiles(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return const SizedBox(
-            height: 0,
-          );
+          return listLoadingWidget();
         }
         // thats for listview , have to be watch
         var mainproviderWatch = context.watch<MainProvider>();
@@ -28,8 +28,8 @@ Widget TileListViewWidget() {
 }
 
 class CityTileWidget extends StatelessWidget {
-  final TimeZoneTileModel model;
-  const CityTileWidget({Key? key, required this.model}) : super(key: key);
+  final TimeZoneTileModel? model;
+  const CityTileWidget({Key? key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class CityTileWidget extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        model.tileText!,
+                        model?.tileText ?? '',
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ],
@@ -65,7 +65,7 @@ class CityTileWidget extends StatelessWidget {
               child: InkWell(
                 onTap: () async {
                   await GlobalVars.navigatorService
-                      .navigateToPage(path: NavigationConstants.secondary, data: model.timezonePath!);
+                      .navigateToPage(path: NavigationConstants.secondary, data: model?.timezonePath ?? '');
                 },
                 child: CircleAvatar(
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,

@@ -1,6 +1,7 @@
 import 'package:dop_case/core/core_shelf.dart';
 import 'package:dop_case/screen/secondary/components/clock_box_widget.dart';
 import 'package:dop_case/screen/secondary/components/sec_bar_widget.dart';
+import 'package:dop_case/screen/secondary/components/sec_loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,10 +17,7 @@ class SecondaryScreen extends StatelessWidget {
           future: secProvider.fetchLocationTime(locationPath),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return Center(
-                child: CircularProgressIndicator(
-                    strokeWidth: 5, color: Theme.of(context).extension<CustomColors>()!.iconColor),
-              );
+              return secLoadingWidget(context);
             }
             return Column(
               children: [
