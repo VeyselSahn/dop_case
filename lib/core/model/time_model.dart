@@ -1,5 +1,7 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'dart:io';
+
 import 'package:intl/intl.dart';
 import 'package:translator/translator.dart';
 
@@ -28,6 +30,8 @@ class TimeModel {
       this.minute});
 
   Future<TimeModel> fromJson(Map<String, dynamic>? json) async {
+    //detect device locale
+    var locale = Platform.localeName.split(r'_').elementAt(0);
     // for translating texts , days and months
     var _translator = GoogleTranslator();
     // thats for spliting are because we will use different text , like 'Wednesday , 22' or '22 , Wednesday' spliting make easier
@@ -37,11 +41,11 @@ class TimeModel {
     var time = convertDateTime(json?['utc_datetime'] ?? '', offset);
 
     //convert to text and translate
-    var _day = await _translator.translate(DateFormat('EEEE').format(time), from: 'en', to: 'tr');
-    var _month = await _translator.translate(DateFormat('MMMM').format(time), from: 'en', to: 'tr');
+    var _day = await _translator.translate(DateFormat('EEEE').format(time), from: 'en', to: locale);
+    var _month = await _translator.translate(DateFormat('MMMM').format(time), from: 'en', to: locale);
     // deciding bar text and translate
     var _barText = decidingTheDay(time.hour);
-    var _trBarText = await _translator.translate(_barText, from: 'en', to: 'tr');
+    var _trBarText = await _translator.translate(_barText, from: 'en', to: locale);
 
     return TimeModel(
         barStatusText: _trBarText.text,

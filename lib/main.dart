@@ -5,6 +5,7 @@ import 'package:provider/provider.dart' as provider;
 
 void main() {
   Locator.instance.setupLocator();
+  // for making status bar color equal the background color
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   runApp(const MyApp());
 }
